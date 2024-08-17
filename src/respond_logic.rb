@@ -39,13 +39,19 @@ def build_response
   # Check if the roll request contains "1dX" and capture the value of X
   if @roll_request.match(/1d(\d+)/i)
     x_value = @roll_request.match(/1d(\d+)/i)[1].to_i
-    
+    response += "\nDebug: I think you're rolling a d#{x_value}"
     # Compare @tally with 1 and X
     if @tally.to_i == 1
-      response += "\n#- I'm sorry, I tried my best..."
+      # response += "\n-# I'm sorry!"
+      response += "\nDebug: I think you rolled a #{@tally.to_i}"
     elsif @tally.to_i == x_value
-      response += "\n#- Yay!"
+      # response += "\n-# Yay!"
+      response += "\nDebug: I think you rolled a #{@tally.to_i}"
+    else
+      response += "\nDebug: I think you rolled a #{@tally.to_i}"
     end
+  else
+  response += "\nDebug: I don't think you rolled 1dsomething"
   end
 
   response
