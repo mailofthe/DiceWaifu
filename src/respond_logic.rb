@@ -46,6 +46,7 @@ def build_response
     elsif @tally.to_i == x_value
       response += "\n#- Yay!"
     end
+  end
 
   response
 end
