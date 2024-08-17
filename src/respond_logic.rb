@@ -35,6 +35,18 @@ def build_response
     response = "I'll try!\n" + response
   end
 
+  # Detect if a single die roll was a minimum or maximum roll (as it's likely a critical fail or success)
+  # Check if the roll request contains "1dX" and capture the value of X
+  if @roll_request.match(/1d(\d+)/i)
+    x_value = @roll_request.match(/1d(\d+)/i)[1].to_i
+    
+    # Compare @tally with 1 and X
+    if @tally.to_i == 1
+      response += "\n#- I'm sorry, I tried my best..."
+    elsif @tally.to_i == x_value
+      response += "\n#- Yay!"
+    end
+
   response
 end
 
