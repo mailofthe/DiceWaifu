@@ -36,20 +36,26 @@ def build_response
   end
 
   # Detect if a single die roll was a minimum or maximum roll (as it's likely a critical fail or success)
+
+  
+
   # Check if the roll request contains "1dX" and capture the value of X
-  if @roll_request.match(/1d(\d+)/i)
-    x_value = @roll_request.match(/1d(\d+)/i)[1].to_i
+  if (x_value = @roll_request.match(/1d(\d+)/i)[1])
+    x_value = x_value.to_i
     response += "\nDebug: I think you're rolling a d#{x_value}"
-    # Compare @tally with 1 and X
+
+    # Get the raw dice roll from the array (which will be a single element, since we rolled 1dX and didn't do Y 1dX)
+    raw_roll = @tally.first.to_i
+    # Compare raw_roll with 1 and X
     response += "Debug: @tally = '#{@tally}'"
-    if @tally.to_i == 1
+    if raw_roll == 1
       # response += "\n-# I'm sorry!"
-      response += "\nDebug: I think you rolled a #{@tally.to_i}"
+      response += "\nDebug: I think you rolled a #{raw_roll}"
     elsif @tally.to_i == x_value
       # response += "\n-# Yay!"
-      response += "\nDebug: I think you rolled a #{@tally.to_i}"
+      response += "\nDebug: I think you rolled a #{raw_roll}"
     else
-      response += "\nDebug: I think you rolled a #{@tally.to_i}"
+      response += "\nDebug: I think you rolled a #{raw_roll}"
     end
   else
   response += "\nDebug: I don't think you rolled 1dsomething"
