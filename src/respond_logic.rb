@@ -24,6 +24,17 @@ def build_response
   response += " Hits DCV `#{@dice_result.scan(/\d+/)}`" if @hsh
 
   response += " Reason: `#{@comment}`" if @has_comment
+
+  # Beginning of Waifu response programming
+
+  # Recognize user politeness
+  # Check both @roll_request and @comment for at least one instance of "please", "pwease", or "plz", case-insensitive
+  # (why @roll_request? because if it's not a properly formatted comment with a ! the user's message stays there)
+  # (why not check the whole message? in case the user has "please" in their name, and so they can't escape my logic to ignore their name)
+  if @roll_request.match?(/please|pwease|plz/i) || @comment.match?(/please|pwease|plz/i)
+    response = "I'll try!\n" + response
+  end
+
   response
 end
 
