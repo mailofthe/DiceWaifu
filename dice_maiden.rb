@@ -14,6 +14,8 @@ require 'dotenv'
 require 'get_process_mem'
 
 Dotenv.load
+puts "TOKEN: '#{ENV['TOKEN']}'"
+puts "SHARD: '#{ENV['SHARD']}'"
 @total_shards = ENV['SHARD'].to_i
 # Add API token
 @bot = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], num_shards: @total_shards, shard_id: ARGV[0].to_i,
