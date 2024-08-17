@@ -8,3 +8,4 @@ gem 'get_process_mem', '~>0.2.1'
 gem 'rest-client', '~>2.1'
 gem 'rubocop', require: false
 gem 'sqlite3', '~> 2.0', '>= 2.0.1'
+gem 'bigdecimal'
