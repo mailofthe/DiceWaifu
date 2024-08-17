@@ -44,8 +44,8 @@ def build_response
     x_value = x_value.to_i
     response += "\nDebug: I think you're rolling a d#{x_value}"
 
-    # Get the raw dice roll from the array (which will be a single element, since we rolled 1dX and didn't do Y 1dX)
-    raw_roll = @tally.first.to_i
+    # Get the raw dice roll from the tally (which will be a single integer, since we rolled 1dX and didn't do Y 1dX)
+    raw_roll = @tally.match(/\d+/)[0].to_i
     # Compare raw_roll with 1 and X
     response += "Debug: @tally = '#{@tally}'"
     if raw_roll == 1
