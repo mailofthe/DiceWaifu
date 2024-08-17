@@ -41,6 +41,7 @@ def build_response
     x_value = @roll_request.match(/1d(\d+)/i)[1].to_i
     response += "\nDebug: I think you're rolling a d#{x_value}"
     # Compare @tally with 1 and X
+    response += "Debug: @tally = '#{@tally}'"
     if @tally.to_i == 1
       # response += "\n-# I'm sorry!"
       response += "\nDebug: I think you rolled a #{@tally.to_i}"
