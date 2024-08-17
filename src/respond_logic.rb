@@ -40,18 +40,18 @@ def build_response
   
 
   # Check if the roll request contains "1dX" and capture the value of X
-  if (x_value = @roll_request.match(/1d(\d+)/i)[1])
-    x_value = x_value.to_i
+  if (x_value = @roll_request.match(/1d(\d+)/i))
+    x_value = x_value[1].to_i
     response += "\nDebug: I think you're rolling a d#{x_value}"
 
     # Get the raw dice roll from the tally (which will be a single integer, since we rolled 1dX and didn't do Y 1dX)
     raw_roll = @tally.match(/\d+/)[0].to_i
     # Compare raw_roll with 1 and X
-    response += "Debug: @tally = '#{@tally}'"
+    # response += "\nDebug: @tally = '#{@tally}'"
     if raw_roll == 1
       # response += "\n-# I'm sorry!"
       response += "\nDebug: I think you rolled a #{raw_roll}"
-    elsif @tally.to_i == x_value
+    elsif raw_roll == x_value
       # response += "\n-# Yay!"
       response += "\nDebug: I think you rolled a #{raw_roll}"
     else
