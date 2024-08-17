@@ -51,13 +51,16 @@ def build_response
     # (why not check the whole message? in case the user has "please" in their name, and so they can't escape my logic to ignore their name)
 
     # user_was_polite = (response.match?(/please|pwease|plz/i) || @comment.match?(/please|pwease|plz/i))
-    # user_was_polite = (response.match?(/p+l+e+a+s+e+|p+w+e+a+s+e+|p+l+z+/i) || @comment.match?(/p+l+e+a+s+e+|p+w+e+a+s+e+|p+l+z+/i))
-    user_was_polite = (response.match?(/\A(?=.*p)(?=.*l)(?=.*e)(?=.*a)(?=.*s)[pleas]+\z/i) ||
-                   response.match?(/\A(?=.*p)(?=.*w)(?=.*e)(?=.*a)(?=.*s)[pweas]+\z/i) ||
-                   response.match?(/\A(?=.*p)(?=.*l)(?=.*z)[plz]+\z/i) ||
-                   @comment.match?(/\A(?=.*p)(?=.*l)(?=.*e)(?=.*a)(?=.*s)[pleas]+\z/i) ||
-                   @comment.match?(/\A(?=.*p)(?=.*w)(?=.*e)(?=.*a)(?=.*s)[pweas]+\z/i) ||
-                   @comment.match?(/\A(?=.*p)(?=.*l)(?=.*z)[plz]+\z/i))
+    
+    user_was_polite = (response.match?(/p+l+e+a+s+e+|p+w+e+a+s+e+|p+l+z+/i) || @comment.match?(/p+l+e+a+s+e+|p+w+e+a+s+e+|p+l+z+/i))
+    # allows repeated letters
+    
+    #user_was_polite = (response.match?(/\A(?=.*p)(?=.*l)(?=.*e)(?=.*a)(?=.*s)[pleas]+\z/i) ||
+    #               response.match?(/\A(?=.*p)(?=.*w)(?=.*e)(?=.*a)(?=.*s)[pweas]+\z/i) ||
+    #               response.match?(/\A(?=.*p)(?=.*l)(?=.*z)[plz]+\z/i) ||
+    #               @comment.match?(/\A(?=.*p)(?=.*l)(?=.*e)(?=.*a)(?=.*s)[pleas]+\z/i) ||
+    #               @comment.match?(/\A(?=.*p)(?=.*w)(?=.*e)(?=.*a)(?=.*s)[pweas]+\z/i) ||
+    #               @comment.match?(/\A(?=.*p)(?=.*l)(?=.*z)[plz]+\z/i))
     # allows the letters to be in any order and number as long as there are no incorrect letters in the word
 
     # user_is_leeroy = @user.downcase.include?("leeroy")
@@ -87,7 +90,7 @@ def build_response
       # response += "\n-# Yay!"
       # response += "\nDebug: I think you rolled a #{raw_roll}"
     else
-      response += "\nDebug: I think you rolled a #{raw_roll}"
+      # response += "\nDebug: I think you rolled a #{raw_roll}"
     end
   else
   # response += "\nDebug: I don't think you rolled 1dsomething"
