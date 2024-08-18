@@ -116,9 +116,9 @@ YAY_MESSAGES = [
     "we did it!",  # 3
     "i twied extwa hard dat time!",  # 4
     "just for you <3",  # 5
-    "i knew we could do it!",  # 6
+    "<3",  # 6
     "i hope dis was an impotant woll!",  # 7
-    "yes! teamwork!",  # 8
+    "i may have helped a wittle >w<",  # 8
     "OwO, what's dis?",  # 9 
     "cwitical success!"  # 10
   ]
@@ -137,13 +137,13 @@ OOPS_MESSAGES = [
   ]
 
 HINT_MESSAGES = [
-    "it'd be nice if you asked powitewy...",  # 1 
+    "you know, i'd appweciate it if you asked powitewy",  # 1 
     "have you twied saying \"pwease\"?",  # 2
     "did you know there's a \"plz\" modifier? i mean, not weally, but...",  # 3
     "maybe you'd have better luck if you asked nicewy?",  # 4 
     "maybe twy saying de magic word?",  # 5
     "maybe if you were more powite?",  # 6 
-    "you can be powite before or aftuh your dice, or in de ! comment",  # 7
+    "if you want, you can be powite before or aftuh your dice, or in de ! reason",  # 7
     "\"pweeeaase\" would work, as wong as de wettuhs are in de wight orduh",  # 8
     "\"please\" and \"pwease\" bohf work. \"plz\" works, too!",  # 9 
     "my powiteness ow-go-wivvim isn't case-sensitive, btw"  # 10
@@ -154,8 +154,8 @@ def try_say(type)
   if (type != "yay" && type != "oops" && type != "hint")
     statement += "\nDebug: \"#{type}\" is not a valid try_say type\n"
   end
-  # Perform a 1d100 roll to decide if/which message to return
-  roll_result = DiceBag::Roll.new('1d10').result.total
+  # Perform a 1d50 roll to decide if/which message to return
+  roll_result = DiceBag::Roll.new('1d50').result.total
   
   # statement += "\nDebug: rolled #{roll_result}"
   if (type == "yay")
