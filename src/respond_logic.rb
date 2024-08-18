@@ -76,15 +76,24 @@ def build_response
     # response += "\nDebug: @tally = '#{@tally}'"
     if raw_roll == 1
       if (user_was_polite)
-        response += "\n-# i'm sowwy, i twied my best ;-;"
+        maybe_message=try_say("oops")
+        response += "\n-# #{maybe_message}" unless maybe_message.empty?
+        
+        # response += "\n-# i'm sowwy, i twied my best ;-;"
       else
-        response += "\n-# maybe twy saying \"pwease\" next time?"
+        maybe_message=try_say("hint")
+        response += "\n-# #{maybe_message}" unless maybe_message.empty?
+        
+        # response += "\n-# maybe twy saying \"pwease\" next time?"
       end
       # response += "\n-# I'm sorry!"
       # response += "\nDebug: I think you rolled a #{raw_roll}"
     elsif raw_roll == x_value
       if (user_was_polite)
-        response += "\n-# >w<"
+        maybe_message=try_say("yay")
+        response += "\n-# #{maybe_message}" unless maybe_message.empty?
+        
+        # response += "\n-# >w<"
       else
       end
       # response += "\n-# Yay!"
@@ -96,33 +105,73 @@ def build_response
   # response += "\nDebug: I don't think you rolled 1dsomething"
   end
 
-  maybe_message=try_say
-  response += "\nDebug: #{maybe_message}" unless maybe_message.empty?
+  
 
   response
 end
 
-MESSAGES = [
-    "1",  # 1 - Empty string
-    "2Keep going!",  # 2
-    "3Nice roll!",  # 3
-    "4",  # 4 - Empty string
-    "5Try again!",  # 5
-    "6",  # 6 - Empty string
-    "7You got this!",  # 7
-    "8Excellent!",  # 8
-    "9",  # 9 - Empty string
-    "10Almost there!"  # 10
+YAY_MESSAGES = [
+    ">w<",  # 1
+    "hehe",  # 2
+    "we did it!",  # 3
+    "i twied extwa hard dat time!",  # 4
+    "just for you <3",  # 5
+    "i knew we could do it!",  # 6
+    "i hope dis was an impotant woll!",  # 7
+    "yes! teamwork!",  # 8
+    "OwO, what's dis?",  # 9 
+    "cwitical success!"  # 10
   ]
 
-def try_say
+OOPS_MESSAGES = [
+    "i'm weally sowwy...",  # 1
+    "i twied so hard...",  # 2
+    ";-;",  # 3
+    "oops...",  # 4 -
+    ">///<",  # 5
+    "i twied my best...",  # 6 
+    "i hope dis wasn't impotant...",  # 7
+    "can i twy again!",  # 8
+    "oh no",  # 9 -
+    "cwitical fail..."  # 10
+  ]
+
+HINT_MESSAGES = [
+    "it'd be nice if you asked powitewy...",  # 1 
+    "have you twied saying \"pwease\"?",  # 2
+    "did you know there's a \"plz\" modifier? i mean, not weally, but...",  # 3
+    "maybe you'd have better luck if you asked nicewy?",  # 4 
+    "maybe twy saying de magic word?",  # 5
+    "maybe if you were more powite?",  # 6 
+    "you can be powite before or aftuh your dice, or in de ! comment",  # 7
+    "\"pweeeaase\" would work, as wong as de wettuhs are in de wight orduh",  # 8
+    "\"please\" and \"pwease\" bohf work. \"plz\" works, too!",  # 9 
+    "my powiteness ow-go-wivvim isn't case-sensitive, btw"  # 10
+  ]
+
+def try_say(type)
+  statement = ""
+  if (type != "yay" && type != "oops" && type != "hint")
+    statement += "\nDebug: \"#{type}\" is not a valid try_say type\n"
+  end
   # Perform a 1d100 roll to decide if/which message to return
   roll_result = DiceBag::Roll.new('1d100').result.total
-  statement = ""
-  statement += "\nDebug: rolled #{roll_result}"
-  if (roll_result < 11)
-    statement += MESSAGES[roll_result - 1]
+  
+  # statement += "\nDebug: rolled #{roll_result}"
+  if (type == "yay")
+    if (roll_result < 11)
+      statement += YAY_MESSAGES[roll_result - 1]
+    end
+  elsif (type == "oops")
+    if (roll_result < 11)
+      statement += OOPS_MESSAGES[roll_result - 1]
+    end
+  else # can only be "hint"
+    if (roll_result < 11)
+      statement += HINT_MESSAGES[roll_result - 1]
+    end
   end
+  
   return statement
 end
 
