@@ -96,7 +96,34 @@ def build_response
   # response += "\nDebug: I don't think you rolled 1dsomething"
   end
 
+  maybe_message=try_say
+  response += "\nDebug: #{maybe_message}" unless maybe_message.empty?
+
   response
+end
+
+messages = [
+    "1",  # 1 - Empty string
+    "2Keep going!",  # 2
+    "3Nice roll!",  # 3
+    "4",  # 4 - Empty string
+    "5Try again!",  # 5
+    "6",  # 6 - Empty string
+    "7You got this!",  # 7
+    "8Excellent!",  # 8
+    "9",  # 9 - Empty string
+    "10Almost there!"  # 10
+  ]
+
+def try_say
+  # Perform a 1d100 roll to decide if/which message to return
+  roll_result = DiceBag::Roll.new('1d100').result.total
+  statement = ""
+  statement += "\nDebug: rolled #{roll_result}"
+  if (roll_result < 11)
+    statement += messages[roll_result - 1]
+  end
+  return statement
 end
 
 def send_response(event)
