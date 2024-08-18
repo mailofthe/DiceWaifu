@@ -131,7 +131,7 @@ OOPS_MESSAGES = [
     ">///<",  # 5
     "i twied my best...",  # 6 
     "i hope dis wasn't impotant...",  # 7
-    "can i twy again!",  # 8
+    "can i twy again?",  # 8
     "oh no",  # 9 -
     "cwitical fail..."  # 10
   ]
@@ -155,7 +155,7 @@ def try_say(type)
     statement += "\nDebug: \"#{type}\" is not a valid try_say type\n"
   end
   # Perform a 1d100 roll to decide if/which message to return
-  roll_result = DiceBag::Roll.new('1d100').result.total
+  roll_result = DiceBag::Roll.new('1d10').result.total
   
   # statement += "\nDebug: rolled #{roll_result}"
   if (type == "yay")
