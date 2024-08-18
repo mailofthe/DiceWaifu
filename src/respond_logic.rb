@@ -102,7 +102,7 @@ def build_response
   response
 end
 
-messages = [
+MESSAGES = [
     "1",  # 1 - Empty string
     "2Keep going!",  # 2
     "3Nice roll!",  # 3
@@ -121,7 +121,7 @@ def try_say
   statement = ""
   statement += "\nDebug: rolled #{roll_result}"
   if (roll_result < 11)
-    statement += messages[roll_result - 1]
+    statement += MESSAGES[roll_result - 1]
   end
   return statement
 end
