@@ -380,6 +380,16 @@ def respond_wrath(event, dnum)
   end
 end
 
+# Waifu code
+def check_uwu(event)
+  if @check =~ /^\s*(\S{3})\s*$/i # any 3 non-whitespace characters, in a string with only whitespace or nothing else
+    captured_string = $1 # $1 is a special operator in Ruby that refers to the 1st capture group of the last regex in the thread
+    event.respond(content: captured_string.to_s) # probably doesn't need to_s but this is safer
+    true
+  end
+end
+# End waifu code
+
 def check_donate(event)
   if @check =~ /^\s*(donate)\s*$/i
     event.respond(content: "\n Care to support the bot? You can donate via Patreon https://www.patreon.com/dicemaiden \n Another option is join the dedicated Dice Maiden Discord server and subscribe! https://discord.gg/4T3R5Cb")
