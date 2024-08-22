@@ -159,6 +159,9 @@ inc_cmd = lambda do |event|
       next if check_donate(event) == true
       next if check_help(event) == true
       next if check_bot_info(event) == true
+      # Waifu code
+      next if check_uwu(event) == true
+      # End waifu code
       next if check_purge(event) == false
     rescue StandardError => e ## The worst that should happen is that we catch the error and return its message.
       e.message = 'NIL MESSAGE!' if e.message.nil?
