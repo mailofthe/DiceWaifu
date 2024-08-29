@@ -188,10 +188,14 @@ end
 @bot.application_command(:r, &inc_cmd)
 
 if @launch_option == 'lite'
-  @bot.run
+  @bot.run :async
 
-  @bot.update_status('online', '/roll', nil, since = 0, afk = false, activity_type = 2) # waifu addition
-
+  # waifu addition begins
+  # Sleep until bot is ready and then set listening status
+  sleep(1) until @bot.ready
+  @bot.update_status('online', '/roll', nil, since = 0, afk = false, activity_type = 2)
+  # waifu addition ends
+  
 else
   @bot.run :async
 
