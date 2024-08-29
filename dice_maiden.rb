@@ -189,6 +189,9 @@ end
 
 if @launch_option == 'lite'
   @bot.run
+
+  @bot.update_status('online', '/roll', nil, since = 0, afk = false, activity_type = 2) # waifu addition
+
 else
   @bot.run :async
 
