@@ -188,14 +188,14 @@ end
 @bot.application_command(:r, &inc_cmd)
 
 if @launch_option == 'lite'
-  @bot.run :async
+  @bot.run # :async
 
   # waifu addition begins
 
   # Sleep until bot is ready and then set listening status
-  sleep(1) until @bot.ready
+  # sleep(1) until @bot.ready
   # @bot.update_status('online', '/roll', nil, since = 0, afk = false, activity_type = 2) # default
-  @bot.update_status('online', 'anime', nil, since = 0, afk = false, activity_type = 3) # otaku
+  # @bot.update_status('online', 'anime', nil, since = 0, afk = false, activity_type = 3) # otaku
 
   # https://github.com/shardlab/discordrb/blob/50fbb5fec83aabf3cdeb94dcfbe771e7a3c4a4bb/lib/discordrb/bot.rb#L550
   # https://discord.com/developers/docs/developer-tools/game-sdk#data-models
