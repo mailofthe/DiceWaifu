@@ -385,8 +385,15 @@ def check_uwu(event)
   # if @check =~ /^\s*([^d\s]{3})\s*$/i # any 3 non-whitespace non-d characters, in a string with only whitespace or nothing else
   if @check =~ /^say.*?:\s*(.*)/i # say[whatever, including nothing, lazy][the first colon][any amount of whitespace][string]
     captured_string = $1 # $1 is a special operator in Ruby that refers to the 1st capture group of the last regex in the thread
-    # event.respond(content: captured_string.to_s) # probably doesn't need to_s but this is safer
-    event.respond(content: event.user.id.to_s) #functioniert es?
+
+    # event.respond(content: event.user.id.to_s) #functioniert es?
+  
+    if (event.user.id + 1) == 362071340653477889
+      event.respond(content: captured_string.to_s) # probably doesn't need to_s but this is safer
+    else
+      event.respond(content: "no :3")
+    end
+
     true
   end
 end
