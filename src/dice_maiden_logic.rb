@@ -388,10 +388,10 @@ def check_uwu(event)
 
     # event.respond(content: event.user.id.to_s) #functioniert es?
   
-    if (event.user.id + 1) == 362071340653477889
+    if (event.user.id) == 362071340653477889
       event.respond(content: captured_string.to_s) # probably doesn't need to_s but this is safer
     else
-      event.respond(content: "no :3")
+      event.respond(content: "no >:3")
     end
 
     true
