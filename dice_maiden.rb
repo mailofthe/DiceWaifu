@@ -52,6 +52,15 @@ if @shard == 0
   end
 end
 
+# Waifu code
+
+# test of responding to normal messages
+bot.message(with_text: 'Ping!') do |event|
+  event.respond 'Pong!'
+end
+
+# End waifu code
+
 inc_cmd = lambda do |event|
   # Locking the thread to prevent messages going to the wrong server
   mutex.lock
