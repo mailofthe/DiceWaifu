@@ -24,7 +24,7 @@ puts "SHARD: '#{ENV['SHARD']}'"
 #                                           intents: %i[servers messages], ignore_bots: true, fancy_log: true
 # trying exact same settings on non-commandbot
 @bot = Discordrb::Bot.new token: ENV['TOKEN'], num_shards: @total_shards, shard_id: ARGV[0].to_i,
-                                           intents: %i[servers messages], ignore_bots: true, fancy_log: true
+                                           intents: :all, ignore_bots: true, fancy_log: true
 @shard = ARGV[0].to_i
 @launch_option = ARGV[1].to_s
 @prefix = ''
@@ -33,7 +33,7 @@ puts "SHARD: '#{ENV['SHARD']}'"
 # open connection to sqlite db and set timeout to 10s if the database is busy
 if @launch_option == 'lite'
   puts 'Dice Maiden lite mode detected!'
-  puts "Bot intents: #{@bot.intents.inspect}"
+  # puts "Bot intents: #{@bot.intents.inspect}"
 else
   require 'sqlite3'
   $db = SQLite3::Database.new 'main.db'
