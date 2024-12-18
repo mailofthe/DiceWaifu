@@ -20,7 +20,10 @@ puts "SHARD: '#{ENV['SHARD']}'"
 # Add API token
 # intents here needs to be updated with the things the bot is allowed to do. it used to just be servers cause it couldn't read or make arbitrary messages
 # intents: %i[servers messages] (which is equivalent to intents = [:servers, :messages])
-@bot = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], num_shards: @total_shards, shard_id: ARGV[0].to_i,
+#@bot = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], num_shards: @total_shards, shard_id: ARGV[0].to_i,
+#                                           intents: %i[servers messages], ignore_bots: true, fancy_log: true
+# trying exact same settings on non-commandbot
+@bot = Discordrb::Bot.new token: ENV['TOKEN'], num_shards: @total_shards, shard_id: ARGV[0].to_i,
                                            intents: %i[servers messages], ignore_bots: true, fancy_log: true
 @shard = ARGV[0].to_i
 @launch_option = ARGV[1].to_s
