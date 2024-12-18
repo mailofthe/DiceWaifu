@@ -55,7 +55,8 @@ end
 # Waifu code
 
 # test of responding to normal messages
-bot.message(with_text: 'Ping!') do |event|
+# did I mean @bot?
+@bot.message(with_text: 'Ping!') do |event|
   event.respond 'Pong!'
 end
 
