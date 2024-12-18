@@ -30,6 +30,7 @@ puts "SHARD: '#{ENV['SHARD']}'"
 # open connection to sqlite db and set timeout to 10s if the database is busy
 if @launch_option == 'lite'
   puts 'Dice Maiden lite mode detected!'
+  puts "Bot intents: #{@bot.intents.inspect}"
 else
   require 'sqlite3'
   $db = SQLite3::Database.new 'main.db'
@@ -208,8 +209,6 @@ if @launch_option == 'lite'
   @bot.run # :async
 
   # waifu addition begins
-  
-  puts "Bot intents: #{@bot.intents.inspect}"
   
   # Sleep until bot is ready and then set listening status
   # sleep(1) until @bot.ready
