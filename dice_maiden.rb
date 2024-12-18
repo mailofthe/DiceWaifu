@@ -58,8 +58,13 @@ end
 
 # test of responding to normal messages
 # did I mean @bot?
-@bot.message(with_text: 'Ping!') do |event|
-  event.respond 'Pong!'
+# @bot.message(with_text: 'Ping!') do |event|
+#   event.respond 'Pong!'
+# end
+
+#debug log
+@bot.message do |event|
+  puts "Message received: #{event.message.content}"
 end
 
 # End waifu code
@@ -203,7 +208,9 @@ if @launch_option == 'lite'
   @bot.run # :async
 
   # waifu addition begins
-
+  
+  puts "Bot intents: #{@bot.intents.inspect}"
+  
   # Sleep until bot is ready and then set listening status
   # sleep(1) until @bot.ready
   # @bot.update_status('online', '/roll', nil, since = 0, afk = false, activity_type = 2) # default
