@@ -18,13 +18,8 @@ puts "TOKEN: '#{ENV['TOKEN']}'"
 puts "SHARD: '#{ENV['SHARD']}'"
 @total_shards = ENV['SHARD'].to_i
 # Add API token
-# intents here needs to be updated with the things the bot is allowed to do. it used to just be servers cause it couldn't read or make arbitrary messages
-# intents: %i[servers messages] (which is equivalent to intents = [:servers, :messages])
 @bot = Discordrb::Commands::CommandBot.new token: ENV['TOKEN'], num_shards: @total_shards, shard_id: ARGV[0].to_i,
-#                                           intents: %i[servers], ignore_bots: true, fancy_log: true
-# trying exact same settings on non-commandbot
-#@bot = Discordrb::Bot.new token: ENV['TOKEN'], num_shards: @total_shards, shard_id: ARGV[0].to_i,
-#                                           intents: :all, ignore_bots: true, fancy_log: true
+                                           intents: %i[servers], ignore_bots: true, fancy_log: true
 @shard = ARGV[0].to_i
 @launch_option = ARGV[1].to_s
 @prefix = ''
@@ -33,7 +28,6 @@ puts "SHARD: '#{ENV['SHARD']}'"
 # open connection to sqlite db and set timeout to 10s if the database is busy
 if @launch_option == 'lite'
   puts 'Dice Maiden lite mode detected!'
-  # puts "Bot intents: #{@bot.intents.inspect}"
 else
   require 'sqlite3'
   $db = SQLite3::Database.new 'main.db'
@@ -44,12 +38,12 @@ mutex = Mutex.new
 
 if @shard == 0
   puts "Shard #{@shard} is registering commands"
-  @bot.register_application_command(:roll, 'Ask Dice Waifu to roll some dice!') do |cmd|
-    cmd.string('message', 'roll syntax sent to Dice Waifu. Type help or visit github to view possible commands', required: true)
+  @bot.register_application_command(:roll, 'Ask Dice Maiden to roll some dice!') do |cmd|
+    cmd.string('message', 'roll syntax sent to Dice Maiden. Type help or visit github to view possible commands', required: true)
   end
 
-  @bot.register_application_command(:r, 'Ask Dice Waifu to roll some dice!') do |cmd|
-    cmd.string('message', 'roll syntax sent to Dice Waifu. Type help or visit github to view possible commands', required: true)
+  @bot.register_application_command(:r, 'Ask Dice Maiden to roll some dice!') do |cmd|
+    cmd.string('message', 'roll syntax sent to Dice Maiden. Type help or visit github to view possible commands', required: true)
   end
 
   # log the command id for the above commands
@@ -57,21 +51,6 @@ if @shard == 0
     puts id
   end
 end
-
-# Waifu code
-
-# test of responding to normal messages
-# did I mean @bot?
-# @bot.message(with_text: 'Ping!') do |event|
-#   event.respond 'Pong!'
-# end
-
-#debug log
-#@bot.message do |event|
-#  puts "Message received: #{event.message.content}"
-#end
-
-# End waifu code
 
 inc_cmd = lambda do |event|
   # Locking the thread to prevent messages going to the wrong server
@@ -212,7 +191,7 @@ if @launch_option == 'lite'
   @bot.run # :async
 
   # waifu addition begins
-  
+
   # Sleep until bot is ready and then set listening status
   # sleep(1) until @bot.ready
   # @bot.update_status('online', '/roll', nil, since = 0, afk = false, activity_type = 2) # default
