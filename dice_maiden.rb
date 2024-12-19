@@ -44,12 +44,12 @@ mutex = Mutex.new
 
 if @shard == 0
   puts "Shard #{@shard} is registering commands"
-  @bot.register_application_command(:roll, 'Ask Dice Maiden to roll some dice!') do |cmd|
-    cmd.string('message', 'roll syntax sent to Dice Maiden. Type help or visit github to view possible commands', required: true)
+  @bot.register_application_command(:roll, 'Ask Dice Waifu to roll some dice!') do |cmd|
+    cmd.string('message', 'roll syntax sent to Dice Waifu. Type help or visit github to view possible commands', required: true)
   end
 
-  @bot.register_application_command(:r, 'Ask Dice Maiden to roll some dice!') do |cmd|
-    cmd.string('message', 'roll syntax sent to Dice Maiden. Type help or visit github to view possible commands', required: true)
+  @bot.register_application_command(:r, 'Ask Dice Waifu to roll some dice!') do |cmd|
+    cmd.string('message', 'roll syntax sent to Dice Waifu. Type help or visit github to view possible commands', required: true)
   end
 
   # log the command id for the above commands
