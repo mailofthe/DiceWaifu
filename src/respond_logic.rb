@@ -42,9 +42,9 @@ def build_response
 
   # Check if the roll request contains "1dX" and capture the value of X, if X is greater than or equal to 6 (coin flips aren't very lucky)
 
-  <<-DOC
-  if (x_value = @roll_request.match(/1d([6-9]|\d{2,})/i))
-    x_value = x_value[1].to_i
+  
+  #if (x_value = @roll_request.match(/1d([6-9]|\d{2,})/i))
+   # x_value = x_value[1].to_i
     # response += "\nDebug: I think you're rolling a d#{x_value}"
 
     # Recognize user politeness
@@ -54,7 +54,7 @@ def build_response
 
     # user_was_polite = (response.match?(/please|pwease|plz/i) || @comment.match?(/please|pwease|plz/i))
     
-    user_was_polite = (response.match?(/p+l+e+a+s+e+|p+w+e+a+s+e+|p+l+z+/i) || @comment.match?(/p+l+e+a+s+e+|p+w+e+a+s+e+|p+l+z+/i))
+ #   user_was_polite = (response.match?(/p+l+e+a+s+e+|p+w+e+a+s+e+|p+l+z+/i) || @comment.match?(/p+l+e+a+s+e+|p+w+e+a+s+e+|p+l+z+/i))
     # allows repeated letters
     
     #user_was_polite = (response.match?(/\A(?=.*p)(?=.*l)(?=.*e)(?=.*a)(?=.*s)[pleas]+\z/i) ||
@@ -72,41 +72,41 @@ def build_response
     # end
 
     # Get the raw dice roll from the tally (which will be a single integer, since we rolled 1dX and didn't do Y 1dX)
-    raw_roll = @tally.match(/\d+/)[0].to_i
+#    raw_roll = @tally.match(/\d+/)[0].to_i
     
     # Compare raw_roll with 1 and X
     # response += "\nDebug: @tally = '#{@tally}'"
-    if raw_roll == 1
-      if (user_was_polite)
-        maybe_message=try_say("oops")
-        response += "\n-# #{maybe_message}" unless maybe_message.empty?
+#    if raw_roll == 1
+ #     if (user_was_polite)
+  #      maybe_message=try_say("oops")
+   #     response += "\n-# #{maybe_message}" unless maybe_message.empty?
         
         # response += "\n-# i'm sowwy, i twied my best ;-;"
-      else
-        maybe_message=try_say("hint")
-        response += "\n-# #{maybe_message}" unless maybe_message.empty?
+  #    else
+   #     maybe_message=try_say("hint")
+   #     response += "\n-# #{maybe_message}" unless maybe_message.empty?
         
         # response += "\n-# maybe twy saying \"pwease\" next time?"
-      end
+  #    end
       # response += "\n-# I'm sorry!"
       # response += "\nDebug: I think you rolled a #{raw_roll}"
-    elsif raw_roll == x_value
-      if (user_was_polite)
-        maybe_message=try_say("yay")
-        response += "\n-# #{maybe_message}" unless maybe_message.empty?
+ #   elsif raw_roll == x_value
+ #     if (user_was_polite)
+  #      maybe_message=try_say("yay")
+   #     response += "\n-# #{maybe_message}" unless maybe_message.empty?
         
         # response += "\n-# >w<"
-      else
-      end
+   #   else
+   #   end
       # response += "\n-# Yay!"
       # response += "\nDebug: I think you rolled a #{raw_roll}"
-    else
+  #  else
       # response += "\nDebug: I think you rolled a #{raw_roll}"
-    end
-  else
+  #  end
+ # else
   # response += "\nDebug: I don't think you rolled 1dsomething"
-  end
-  DOC
+ # end
+  
 
   
 
