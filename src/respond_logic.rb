@@ -41,6 +41,8 @@ def build_response
   # Detect if a single die roll was a minimum or maximum roll (as it's likely a critical fail or success)
 
   # Check if the roll request contains "1dX" and capture the value of X, if X is greater than or equal to 6 (coin flips aren't very lucky)
+
+  <<-DOC
   if (x_value = @roll_request.match(/1d([6-9]|\d{2,})/i))
     x_value = x_value[1].to_i
     # response += "\nDebug: I think you're rolling a d#{x_value}"
@@ -104,6 +106,7 @@ def build_response
   else
   # response += "\nDebug: I don't think you rolled 1dsomething"
   end
+  DOC
 
   
 
